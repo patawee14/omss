@@ -1,0 +1,103 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <!-- <h4 class="title">Striped Table</h4>
+                    <p class="category">Here is a subtitle for this table</p> -->
+                </div>
+                <div class="text-center">
+
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 ml-auto mr-auto">
+                            <div class="form-group">
+                                <label>ค้นหา</label>
+                                <input type="text" class="form-control border-input" placeholder="คำค้น"
+                                    [(ngModel)]="textSearch">
+                            </div>
+                            <button type="submit" class="btn btn-info btn-fill btn-wd"
+                                (click)="searchData(textSearch)">ค้นหา</button>
+                            <button type="submit" class="btn btn-success btn-fill btn-wd"
+                                (click)="exportLogReport()">Export</button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+
+                <div class="content table-responsive table-full-width">
+                    <!-- <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let row of tableData1.dataRows">
+                                <td *ngFor="let cell of row">{{cell}}</td>
+                                <td>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+
+
+
+                    <!-- <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>Username</th>
+                                <th>อุปกรณ์</th>
+                                <th>แอพลิเคชัน</th>
+                                <th>เวลา</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of listReport;let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ item.username }}</td>
+                                <td>{{ item.uuid }}</td>
+                                <td>{{ item.appName }}</td>
+                                <td>{{ item.createDateText}}</td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+
+
+
+
+                    <ngx-datatable class="material" [rows]="listReport" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="'auto'" [limit]="10">
+
+
+                        <ngx-datatable-column name="ลำดับ" [draggable]="false" [maxWidth]="100" headerClass="headerColummn">
+                            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                <strong>{{rowIndex + 1}}</strong>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Username" headerClass="headerColummn" prop="username" [draggable]="false" [resizeable]="false"
+                            cellClass="cell-align-center">
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="อุปกรณ์" headerClass="headerColummn" prop="uuid" [draggable]="false" [resizeable]="false"
+                            cellClass="cell-align-center">
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="แอพลิเคชัน" headerClass="headerColummn" prop="appName" [draggable]="false" [resizeable]="false"
+                            cellClass="cell-align-center">
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="เวลา" headerClass="headerColummn" prop="createDateText" [draggable]="false" [resizeable]="false"
+                            cellClass="cell-align-center">
+                        </ngx-datatable-column>
+
+                    </ngx-datatable>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

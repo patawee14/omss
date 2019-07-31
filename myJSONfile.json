@@ -1,0 +1,86 @@
+{
+  "getApp": {
+    "code": "1",
+    "message": "OK",
+    "err": null,
+    "data": [
+      {
+        "appId": 1,
+        "appName": "TEST1",
+        "version": "COM1",
+        "typeId" : 1,
+        "typeName": "ผู้ประกอบการ",
+        "statusId": 1,
+        "statusName": "เปิดใช้งาน"
+      },
+      {
+        "appId": 2,
+        "appName": "TEST2",
+        "version": "COM2",
+        "typeId" : 2,
+        "typeName": "เจ้าหน้าที่",
+        "statusId": 2,
+        "statusName": "ปิดการใช้งาน"
+      }
+    ]
+  },
+  "getDevice": {
+    "code": "1",
+    "message": "OK",
+    "err": null,
+    "data": [
+      {
+        "id": 1,
+        "uuid": "AAAA-BBBB-CCCC-DDDD",
+        "brandName": "A-Phone",
+        "modelName" : "A-123"
+      },
+      {
+        "id": 2,
+        "uuid": "ZZZZ-YYYY-XXXX-WWWW",
+        "brandName": "JumJung",
+        "modelName" : "J-456"
+      }
+    ]
+  },
+  "author": [
+    {
+      "id": 1,
+      "age": 16,
+      "name": "Andy"
+    },
+    {
+      "id": 2,
+      "age": 22,
+      "name": "Lisa"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "date": "03-18-2016",
+      "message": "Nice!"
+    },
+    {
+      "id": 2,
+      "date": "06-21-2017",
+      "message": "Great view!"
+    }
+  ],
+  "pictures": [
+    {
+      "id": 1,
+      "author": "Lisa",
+      "description": "A wonderful view of nature",
+      "img": "https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/8V46UZCS0V.jpg",
+      "title": "A natural view"
+    },
+    {
+      "id": 2,
+      "author": "Andy",
+      "description": "Seaside sunset",
+      "img": "https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/8V46UZCS0V.jpg",
+      "title": "Landscape view"
+    }
+  ]
+}

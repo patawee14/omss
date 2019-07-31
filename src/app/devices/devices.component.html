@@ -1,0 +1,219 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div [hidden]="mode !== 0" class="header">
+                    <!-- <h4 class="title">Striped Table</h4>
+                    <p class="category">Here is a subtitle for this table</p> -->
+                </div>
+                <div [hidden]="mode !== 0" class="content table-responsive table-full-width">
+                    <!-- <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let row of tableData1.dataRows">
+                                <td *ngFor="let cell of row">{{cell}}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning btn-icon" (click)="onEdit(row)">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+
+                    <!-- <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>หมายเลข UUID</th>
+                                <th>รุ่น</th>
+                                <th>โมเดล</th>
+                                <th>จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of listDevices;let i = index">
+                                <td>{{i + 1}}</td>
+                                <td>{{ item.uuid }}</td>
+                                <td>{{ item.brand }}</td>
+                                <td>{{ item.model }}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning btn-icon" (click)="onEdit(item)">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger btn-icon" (click)="onDelete(item)">
+                                        <i class="fa ti-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+
+
+
+
+
+                    <ngx-datatable class="material" [rows]="listDevices" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="'auto'" [limit]="10">
+
+
+                        <ngx-datatable-column name="ลำดับ" [maxWidth]="100" [draggable]="false"
+                            headerClass="headerColummn">
+                            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                <strong>{{rowIndex + 1}}</strong>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="หมายเลข UUID" prop="uuid" [draggable]="false"
+                            headerClass="headerColummn" [resizeable]="false" cellClass="cell-align-center">
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="รุ่น" prop="brand" [draggable]="false" [resizeable]="false"
+                            headerClass="headerColummn" cellClass="cell-align-center">
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="โมเดล" prop="model" [draggable]="false" [resizeable]="false"
+                            headerClass="headerColummn" cellClass="cell-align-center">
+                        </ngx-datatable-column>
+
+
+
+                        <ngx-datatable-column name="จัดการ" width="300" [draggable]="false" headerClass="headerColummn">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+
+                                <button class="btn btn-sm btn-warning btn-icon" (click)="onEdit(row)">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+
+                                <button class="btn btn-sm btn-danger btn-icon" (click)="onDelete(row)">
+                                    <i class="fa ti-trash"></i>
+                                </button>
+
+                            </ng-template>
+                        </ngx-datatable-column>
+
+
+
+                        <!-- <ngx-datatable-footer *ngIf="true">
+                            <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
+                                let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset">
+                                <div style="padding: 5px 10px">
+
+                                    <div>
+                                        Rows: {{ rowCount }} | Size: {{ pageSize }} | Current:
+                                        {{ curPage }} | Offset: {{ offset }}
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngx-datatable-footer> -->
+
+
+                    </ngx-datatable>
+
+                </div>
+                <div [hidden]="mode !== 1" class="content table-responsive table-full-width">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8">
+                                <div class="card">
+                                    <div class="header">
+                                        <div class="row">
+                                            <div class="col-xs-9">
+                                                <h4 class="title">จัดการอุปกรณ์</h4>
+                                            </div>
+                                            <div class="col-xs-3 text-right">
+                                                <button class="btn btn-sm btn-danger btn-icon"
+                                                    (click)="onDelete(model)">
+                                                    <i class="fa ti-trash"></i>ลบอุปกรณ์
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="content">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <label>รหัส UUID</label>
+                                                        <input type="text" class="form-control border-input"
+                                                            [(ngModel)]="model.uuid" name="uuid" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>รุ่น</label>
+                                                        <input type="text" class="form-control border-input"
+                                                            [(ngModel)]="model.brand" name="brandName" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">โมเดล</label>
+                                                        <input type="text" class="form-control border-input"
+                                                            [(ngModel)]="model.model" name="modelName" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+
+                                <div class="card">
+                                    <div class="header">
+                                        <h4 class="title">แอพลิเคชันที่อนุญาต</h4>
+                                    </div>
+                                    <div class="content">
+                                        <ul class="list-unstyled team-members">
+
+                                            <li *ngFor="let item of model.permission">
+                                                <div class="row">
+                                                    <div class="col-xs-9">
+                                                        <p class="category">{{item.appName}}</p>
+                                                    </div>
+                                                    <div class="col-xs-3 text-right">
+                                                        <bSwitch [switch-on-color]="'primary'"
+                                                            [switch-off-color]="'primary'"
+                                                            [(ngModel)]="item.permissionStatusID"
+                                                            [switch-on-text]="onText" [switch-off-text]="offText">
+                                                        </bSwitch>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!-- <li>
+                                                <div class="row">
+                                                    <div class="col-xs-9">
+                                                        <p class="category">One stop mobile survey</p>
+                                                    </div>
+                                                    <div class="col-xs-3 text-right">
+                                                        <bSwitch [switch-on-color]="'primary'"
+                                                            [switch-off-color]="'primary'" [switch-on-text]="onText"
+                                                            [switch-off-text]="offText">
+                                                        </bSwitch>
+                                                    </div>
+                                                </div>
+                                            </li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-info btn-fill btn-wd" (click)="onSave()">บันทึก</button>
+                        <button type="submit" class="btn btn-info btn-fill btn-wd btn-danger"
+                            (click)="onCancel()">ยกเลิก</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

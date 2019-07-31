@@ -1,0 +1,211 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div [hidden]="mode !== 0" class="header">
+                    <!-- <h4 class="title">Striped Table</h4>
+                    <p class="category">Here is a subtitle for this table</p> -->
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="text-right" style="padding-bottom:20px;">
+                                <button class="btn btn-sm btn-danger btn-icon" (click)="onAdd()">
+                                    <i class="fa ti-plus"></i>
+                                    <span>เพิ่มแอพลิเคชันใหม่</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div [hidden]="mode !== 0" class="content table-responsive table-full-width">
+
+                    <ngx-datatable class="material" [rows]="listAppsTemp" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="'auto'" [limit]="10">
+
+
+                        <ngx-datatable-column name="ลำดับ" [draggable]="false" [maxWidth]="100"
+                            headerClass="headerColummn">
+                            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                <strong>{{rowIndex + 1}}</strong>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+
+                        <ngx-datatable-column *ngFor="let item of columns" name="{{item.name}}" prop="{{item.field}}"
+                            [draggable]="false" headerClass="headerColummn" [resizeable]="false"
+                            cellClass="cell-align-center">
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="จัดการ" width="300" [draggable]="false" headerClass="headerColummn">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+
+                                <button class="btn btn-sm btn-warning btn-icon" (click)="onEdit(row)">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+
+                                <button class="btn btn-sm btn-danger btn-icon" (click)="onDelete(row)">
+                                    <i class="fa ti-trash"></i>
+                                </button>
+
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                    </ngx-datatable>
+
+
+
+                </div>
+
+                <div [hidden]="mode !== 1 && mode !== 2" class="content table-responsive table-full-width">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-5">
+                                <div class="text-center">
+                                    <!-- <div class="image"> -->
+                                    <!-- <div class="">
+                                        <img src="assets/img/background.jpg" alt="..." />
+                                    </div> -->
+                                    <div class="image-upload">
+                                        <img [src]="model.img" style="max-width:300px;max-height:300px" />
+                                        <input name="imageUrl" type="file" accept="image/*"
+                                            (change)="handleInputChange($event)" />
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-7">
+                                <div class="card">
+                                    <div class="header">
+                                        <h4 class="title">จัดการแอพลิเคชัน</h4>
+                                    </div>
+                                    <div class="content">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <label>ชื่อ</label>
+                                                        <!-- <input type="text" class="form-control border-input"
+                                                            placeholder="Company" value="ESS-Mobile Application"> -->
+                                                        <input type="text" class="form-control border-input" required
+                                                            [(ngModel)]="model.appName" name="appName">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Version</label>
+                                                        <!-- <input type="email" class="form-control border-input"
+                                                            placeholder="App version" value="1.2.3"> -->
+                                                        <input type="text" class="form-control border-input"
+                                                            [(ngModel)]="model.version" name="version">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Package name</label>
+                                                        <!-- <input type="email" class="form-control border-input"
+                                                                        placeholder="App version" value="1.2.3"> -->
+                                                        <input type="text" class="form-control border-input"
+                                                            [(ngModel)]="model.packageName" name="packageName">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>ประเภท</label>
+                                                        <!-- <input type="text" class="form-control border-input"
+                                                            placeholder="ประเภท" value="เจ้าหน้าที่"> -->
+                                                        <!-- <input type="text" class="form-control border-input" [(ngModel)]="model.typeName" name="typeName"> -->
+                                                        <select class="form-control border-input"
+                                                            [(ngModel)]="model.typeId" name="typeName">
+                                                            <option *ngFor="let item of typeList"
+                                                                [ngValue]="item.typeId">
+                                                                {{item.typeName}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>สถานะ</label>
+                                                        <!-- <input type="text" class="form-control border-input"
+                                                            placeholder="Last Name" value="เปิดใช้บริการ"> -->
+                                                        <!-- <input type="text" class="form-control border-input" [(ngModel)]="model.statusId" name="status"> -->
+                                                        <select class="form-control border-input"
+                                                            [(ngModel)]="model.statusId" name="statusName">
+                                                            <option *ngFor="let item of statusList"
+                                                                [ngValue]="item.statusId">
+                                                                {{item.statusName}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Address</label>
+                                                        <input type="text" class="form-control border-input"
+                                                            placeholder="Home Address" value="Melbourne, Australia">
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+                                            <!-- <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        <input type="text" class="form-control border-input"
+                                                            placeholder="City" value="Melbourne">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Country</label>
+                                                        <input type="text" class="form-control border-input"
+                                                            placeholder="Country" value="Australia">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Postal Code</label>
+                                                        <input type="number" class="form-control border-input"
+                                                            placeholder="ZIP Code">
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>คำอธิบาย</label>
+                                                        <!-- <textarea rows="5" class="form-control border-input"
+                                                            placeholder="คำอธิบาย">ระบบ Selft-service สำหรับผู้ประกอบการ (ต่อใบอนุญาตฯ สุรา ยาสูบ ไพ่ + ภาษีสรรพสามิต) - อยู่ในระหว่างพัฒนา - Ionic v3.9.2</textarea> -->
+                                                        <textarea class="form-control border-input"
+                                                            [(ngModel)]="model.description"
+                                                            name="description"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="text-center">
+                                                <button type="submit" class="btn btn-info btn-fill btn-wd"
+                                                    (click)="onSave()">บันทึก</button>
+                                                <button type="submit" class="btn btn-info btn-fill btn-wd btn-danger"
+                                                    (click)="onCancel()">ยกเลิก</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

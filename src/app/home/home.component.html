@@ -1,0 +1,24 @@
+<div class="wrapper">
+    <div class="sidebar" data-background-color="white" data-active-color="danger">
+        <sidebar-cmp></sidebar-cmp>
+    </div>
+    <div class="main-panel">
+        <navbar-cmp></navbar-cmp>
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+        <!-- <footer-cmp></footer-cmp> -->
+    </div>
+</div>
+<app-confirm-dialog></app-confirm-dialog>  
+<ngx-spinner
+bdOpacity = 0.9
+bdColor = "#333"
+size = "medium"
+color = "#fff"
+type = "ball-atom" 
+>
+<p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<!-- <fixedplugin-cmp></fixedplugin-cmp> -->
