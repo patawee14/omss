@@ -33,7 +33,7 @@
     "core-js": "2.4.1",
     "datatables.net": "1.10.19",
     "datatables.net-dt": "1.10.19",
-    "express": "4.15.3",
+    "express": "4.17.3",
     "jquery": "1.12.4",
     "jw-bootstrap-switch-ng2": "1.0.8",
     "moment": "2.18.1",
